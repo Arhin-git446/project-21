@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Numbers Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Random Numbers Generator</h1>
+        <button id="generateBtn">Generate Numbers</button>
+        <div id="output">
+            <p><strong>Random Numbers:</strong> <span id="randomNumbers"></span></p>
+            <p><strong>Current Date:</strong> <span id="currentDate"></span></p>
+            <p><strong>Rounded Numbers:</strong> <span id="roundedNumbers"></span></p>
+            <p><strong>Sum of Numbers:</strong> <span id="sumNumbers"></span></p>
+        </div>
+    </div>
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", () => {
+            const generateBtn = document.getElementById("generateBtn");
+            const randomNumbersElem = document.getElementById("randomNumbers");
+            const currentDateElem = document.getElementById("currentDate");
+            const roundedNumbersElem = document.getElementById("roundedNumbers");
+            const sumNumbersElem = document.getElementById("sumNumbers");
+
+            generateBtn.addEventListener("click", () => {
+                // Generate random numbers
+                const randomNumbers = Array.from({ length: 5 }, () => Math.random() * 100);
+
+                // Round the numbers
+                const roundedNumbers = randomNumbers.map(num => Math.round(num * 100) / 100);
+
+                // Calculate the sum of the numbers
+                const sum = roundedNumbers.reduce((acc, num) => acc + num, 0);
+
+                // Get the current date and time
+                const currentDate = new Date().toLocaleString();
+
+                // Display results
+                randomNumbersElem.textContent = randomNumbers.map(num => num.toFixed(2)).join(", ");
+                currentDateElem.textContent = currentDate;
+                roundedNumbersElem.textContent = roundedNumbers.join(", ");
+                sumNumbersElem.textContent = sum.toFixed(2);
+            });
+        });
+    </script>
+</body>
+</html>
